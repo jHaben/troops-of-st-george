@@ -9,7 +9,7 @@
           <v-img
             v-if="height <= 400"
             class="my-1"
-            alt="Patria Logo"
+            alt="Troop 121 Logo"
             src="../../assets/smallLogo2.png"
             transition="scale-transition"
             max-height="72"
@@ -20,7 +20,7 @@
           <v-img
             v-else
             class="my-1"
-            alt="Patria Logo"
+            alt="Troop 121 Logo"
             src="../../assets/smallLogo2.png"
             transition="scale-transition"
             max-height="72"

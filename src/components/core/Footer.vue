@@ -25,7 +25,7 @@
 
       <v-divider />
       <v-card-text class="py-2 white--text text-center" color="rgb(255,215,0)">
-        <strong>PATRIA</strong> — {{ new Date().getFullYear() }}
+        <strong>Troop 121</strong> — {{ new Date().getFullYear() }}
       </v-card-text>
     </v-card>
   </v-footer>
