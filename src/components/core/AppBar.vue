@@ -1,18 +1,17 @@
 <template>
-  <v-app-bar app color="rgb(211,62,39,1)" dark height="75">
+  <v-app-bar app color="rgb(211,62,39,1)" dark height="100">
     <v-container>
       <v-row class="d-flex flex-nowrap my-2">
         <v-col>
-          <v-app-bar-nav-icon @click="toggleDrawer"/>
+          <v-app-bar-nav-icon @click="toggleDrawer" />
         </v-col>
         <v-col>
           <v-img
             v-if="height <= 400"
             class="my-1"
             alt="Troop 121 Logo"
-            src="../../assets/smallLogo2.png"
+            src="../../assets/logo.png"
             transition="scale-transition"
-            max-height="72"
             max-width="200"
             contain
           />
@@ -21,10 +20,10 @@
             v-else
             class="my-1"
             alt="Troop 121 Logo"
-            src="../../assets/smallLogo2.png"
+            src="../../assets/logo.png"
             transition="scale-transition"
-            max-height="72"
-            max-width="500"
+            max-height="80"
+         
             contain
           />
         </v-col>
@@ -40,9 +39,9 @@
               v-if="!link.last"
               text
               rounded
-            
-               outlined
-              style="border-width: 2px; border-color: white"
+              color="black"
+              outlined
+              style="border-width: 2px; border-color: black; background-color:white;"
               class="myBtn ma-2"
               @click="onClick($event, link)"
             >
@@ -53,10 +52,11 @@
               :href="link.href"
               v-else
               text
+              color="black"
               class="myBtn ma-2"
               rounded
               outlined
-              style="border-width: 2px; border-color: white"
+              style="border-width: 2px; border-color: black; background-color:white;"
               @click="onClick($event, link)"
             >
               {{ link.text }}
