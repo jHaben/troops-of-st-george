@@ -4,6 +4,7 @@ import HomeSection from "../views/HomeSection.vue";
 // import UnderConstruction from "../views/UnderConstruction.vue"
 import LetterSection from "../views/LetterSection.vue";
 import NotFound from '../views/NotFound.vue';
+import DonutCalc from '../views/DonutCalc.vue';
 
 Vue.use(Router);
 
@@ -20,6 +21,11 @@ export default new Router({
       path: "/",
       name: "home",
       component: HomeSection,
+    },
+    {
+      path: "/donut",
+      name: "donutCalc",
+      component: DonutCalc,
     },
     {
       path: "/letter",

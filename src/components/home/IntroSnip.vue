@@ -4,9 +4,9 @@
       <v-container>
         <base-card tile flat class="ma-4">
           <v-row>
-            <v-col>
+            <v-col align="center">Welcome</v-col
+            ><v-col>
               <h2 class="text4 text-wrap" style="font-size: 25px">
-                Welcome,
                 <p>
                   We are the Troops of St. George-Troop 121 from the Church of
                   St. Agnes in St. Paul, MN.
