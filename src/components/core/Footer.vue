@@ -24,7 +24,7 @@
       </v-card-text>
 
       <v-divider />
-      <v-card-text class="py-2 white--text text-center" color="rgb(255,215,0)">
+      <v-card-text class="py-2 white--text text-center" color="rgb(235,243,243)">
         <strong>Troop 121</strong> — {{ new Date().getFullYear() }}
       </v-card-text>
     </v-card>

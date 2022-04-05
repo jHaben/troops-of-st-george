@@ -1,18 +1,18 @@
 <template>
-  <v-app-bar app color="rgb(211,62,39,1)" dark height="100">
+  <v-app-bar app color="rgb(235,243,243)" dark height="100">
     <v-container>
       <v-row class="d-flex flex-nowrap my-2">
         <v-col>
-          <v-app-bar-nav-icon @click="toggleDrawer" />
+          <v-app-bar-nav-icon color="black" @click="toggleDrawer" />
         </v-col>
-        <v-col>
+        <v-col style="max-width: 300px">
           <v-img
             v-if="height <= 400"
             class="my-1"
             alt="Troop 121 Logo"
             src="../../assets/logo.png"
             transition="scale-transition"
-            max-width="200"
+            max-width="150"
             contain
           />
 
@@ -23,7 +23,6 @@
             src="../../assets/logo.png"
             transition="scale-transition"
             max-height="80"
-         
             contain
           />
         </v-col>
@@ -41,7 +40,11 @@
               rounded
               color="black"
               outlined
-              style="border-width: 2px; border-color: black; background-color:white;"
+              style="
+                border-width: 1px;
+                border-color: black;
+                background-color: white;
+              "
               class="myBtn ma-2"
               @click="onClick($event, link)"
             >
@@ -56,7 +59,11 @@
               class="myBtn ma-2"
               rounded
               outlined
-              style="border-width: 2px; border-color: black; background-color:white;"
+              style="
+                border-width: 1px;
+                border-color: black;
+                background-color: white;
+              "
               @click="onClick($event, link)"
             >
               {{ link.text }}
