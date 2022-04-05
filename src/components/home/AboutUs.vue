@@ -9,16 +9,14 @@
             </v-col>
             <div class="text4 text-wrap ma-4">
               <p>
-                The Patria Coffee Shop meetups are a bi-monthly opportunity for
-                Christians of any denomination who out of love for Christ would
-                try to cooperate with His Will that all Christians be one. The
-                gatherings are organized by a group of Catholic men who live in
-                the greater Twin Cities area. We love Jesus Christ and his
-                prayer revealed to us in John 17:21 for all Christians to be one
-                in Him has moved us to extend this invitation to you. We are
-                sending the invitation to all Christians of whatever
-                denomination in the greater Twin Cities area so feel free to
-                pass it along!
+                Mission Statement “The Troops of Saint George apostolate aims to
+                use the outdoors as our canvas and the sacraments as our path to
+                light the way for the formation of Holy Catholic men and boys.
+                Whether called to the vocation of the priesthood, the religious
+                life, or that of Holy fatherhood, our fathers and sons will take
+                a prayerful pilgrimage together to fulfill Christ’s desire for
+                them to grow in virtue and in their Holy Catholic faith as they
+                journey toward heaven.”
               </p>
             </div>
           </v-row>
@@ -34,11 +32,9 @@ import { mapGetters, mapMutations } from "vuex";
 export default {
   name: "HomeAboutUs",
 
-   computed: {
+  computed: {
     ...mapGetters(["appBarLinks"]),
   },
-
-
 
   methods: {
     ...mapMutations(["toggleDrawer"]),
