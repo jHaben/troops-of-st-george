@@ -19,16 +19,16 @@
                 </v-img>
               </v-col>
               <v-col>
-                <v-btn
+                <v-btn @click="minusItem('donut')"
                   ><v-icon>{{ "mdi-minus" }}</v-icon></v-btn
                 >
               </v-col>
               <v-col>
-                <v-btn>
+                <v-btn @click="addItem('donut')">
                   <v-icon>{{ "mdi-plus" }}</v-icon></v-btn
                 >
               </v-col>
-              <v-col>0</v-col>
+              <v-col>{{ donut }}</v-col>
             </v-row>
             <v-row>
               <v-col
@@ -40,16 +40,16 @@
                 </v-img>
               </v-col>
               <v-col>
-                <v-btn
+                <v-btn @click="minusItem('sandwhich')"
                   ><v-icon>{{ "mdi-minus" }}</v-icon></v-btn
                 >
               </v-col>
               <v-col>
-                <v-btn>
+                <v-btn @click="addItem('sandwhich')">
                   <v-icon>{{ "mdi-plus" }}</v-icon></v-btn
                 >
               </v-col>
-              <v-col>0</v-col>
+              <v-col>{{ sandwhich }}</v-col>
             </v-row>
             <v-row>
               <v-col
@@ -61,16 +61,16 @@
                 </v-img>
               </v-col>
               <v-col>
-                <v-btn
+                <v-btn @click="minusItem('coffee')"
                   ><v-icon>{{ "mdi-minus" }}</v-icon></v-btn
                 >
               </v-col>
               <v-col>
-                <v-btn>
+                <v-btn @click="addItem('coffee')">
                   <v-icon>{{ "mdi-plus" }}</v-icon></v-btn
                 >
               </v-col>
-              <v-col>0</v-col>
+              <v-col>{{ coffee }}</v-col>
             </v-row>
             <v-row>
               <v-col
@@ -82,28 +82,30 @@
                 </v-img>
               </v-col>
               <v-col>
-                <v-btn
+                <v-btn @click="minusItem('drink')"
                   ><v-icon>{{ "mdi-minus" }}</v-icon></v-btn
                 >
               </v-col>
               <v-col>
-                <v-btn>
+                <v-btn @click="addItem('drink')">
                   <v-icon>{{ "mdi-plus" }}</v-icon></v-btn
                 >
               </v-col>
-              <v-col>0</v-col>
+              <v-col>{{ drink }}</v-col>
             </v-row>
 
             <v-sheet height="15" />
             <v-row
-              ><v-col align="center"><strong>Total: $</strong></v-col></v-row
+              ><v-col align="center"
+                ><strong>Total: $ {{ getTotal }}</strong></v-col
+              ></v-row
             >
             <v-sheet height="15" />
             <v-divider />
             <v-sheet height="15" />
             <v-row
               ><v-col align="left"
-                ><strong>Amount Paid: $ 0.00 </strong></v-col
+                ><strong>Amount Paid: $ {{ getPaid }} </strong></v-col
               ></v-row
             >
             <v-row>
@@ -144,19 +146,21 @@
               <v-col>
                 <v-btn rounded>0</v-btn>
               </v-col>
-              <v-col> <v-btn rounded>C</v-btn></v-col>
+              <v-col> <v-btn rounded @click="setPaid">C</v-btn></v-col>
             </v-row>
             <v-sheet height="15" />
             <v-divider />
             <v-sheet height="15" />
             <v-row
-              ><v-col align="center"><strong>Change: $</strong></v-col></v-row
+              ><v-col align="center"
+                ><strong>Change: $ {{ getChange }}</strong></v-col
+              ></v-row
             >
             <v-divider />
             <v-sheet height="15" />
             <v-row
               ><v-col align="right"
-                ><v-btn><strong>Reset</strong></v-btn></v-col
+                ><v-btn @click="reset"><strong>Reset</strong></v-btn></v-col
               ></v-row
             >
           </div>
@@ -173,58 +177,73 @@ export default {
   name: "DonutCalc",
   data() {
     return {
-      items: [
-        {
-          src: require("../assets/groto.png"),
-        },
-        {
-          src: require("../assets/ice.png"),
-        },
-        {
-          src: require("../assets/barn-food.png"),
-        },
-        {
-          src: require("../assets/barn.jpg"),
-        },
-        {
-          src: require("../assets/priest.jpg"),
-        },
-        {
-          src: require("../assets/dishes.jpg"),
-        },
-        {
-          src: require("../assets/firetruck.jpg"),
-        },
-        {
-          src: require("../assets/fishing.jpg"),
-        },
-        {
-          src: require("../assets/mary.jpg"),
-        },
-        {
-          src: require("../assets/Mass.jpg"),
-        },
-      ],
+      donut: 0,
+      sandwhich: 0,
+      coffee: 0,
+      drink: 0,
+      total: 0,
+      paid: 0,
     };
   },
+
   computed: {
-    height() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return 220;
-        case "sm":
-          return 400;
-        case "md":
-          return 500;
-        case "lg":
-          return 600;
-        case "xl":
-          return 800;
+    getTotal() {
+      var num =
+        this.donut * 1.25 +
+        this.sandwhich * 3 +
+        this.coffee +
+        this.drink * 0.75;
+      return num.toFixed(2);
+    },
+
+    getPaid() {
+      var num = this.paid;
+      return num.toFixed(2);
+    },
+    getChange() {
+      var num = this.paid - this.total;
+      return num.toFixed(2);
+    },
+  },
+  methods: {
+    addItem(item) {
+      this[item]++;
+      this.setTotal();
+    },
+
+    minusItem(item) {
+      if (this[item] > 0) {
+        this[item]--;
+      } else {
+        this[item] = 0;
       }
-      return 1000;
+      this.setTotal();
+      return;
+    },
+
+    setTotal() {
+      this.total =
+        this.donut * 1.25 +
+        this.sandwhich * 3 +
+        this.coffee +
+        this.drink * 0.75;
+    },
+
+    setPaid() {
+      this.paid = 50;
+    },
+
+    reset() {
+      this.donut = 0;
+      this.sandwhich = 0;
+      this.coffee = 0;
+      this.drink = 0;
+      this.total = 0;
+      this.paid = 0;
     },
   },
 
+  watch: {},
   components: {},
 };
 </script>
