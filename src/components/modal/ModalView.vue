@@ -143,7 +143,7 @@ export default {
 
       postData.append("to", 1);
       postData.append("from", this.name);
-      postData.append("subject", "tsg-troop121.org");
+      postData.append("subject", "tsg121.org");
       postData.append("text", this.message);
       postData.append("email", this.email);
       try {

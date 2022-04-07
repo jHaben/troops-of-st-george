@@ -1,8 +1,6 @@
 import axios from "axios";
 export default axios.create({
- baseURL: "https://jserv.jackhaben.com",
-
-
+  baseURL: "https://jserv.jackhaben.com",
 
 
   headers: {
