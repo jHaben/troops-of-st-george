@@ -27,7 +27,7 @@
           />
         </v-col>
         <v-row class="d-flex flex-nowrap my-2">
-          <v-col
+          <v-col align="center"
             class="hidden-sm-and-down"
             v-for="(link, i) in appBarLinks"
             :key="i"

@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { links } from './link.module';
-import {articleList} from './article.module'
 Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     links,
-    articleList,
   },
   state: {
     drawer: false,

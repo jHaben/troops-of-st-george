@@ -2,9 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import HomeSection from "../views/HomeSection.vue";
 // import UnderConstruction from "../views/UnderConstruction.vue"
-import LetterSection from "../views/LetterSection.vue";
-import NotFound from '../views/NotFound.vue';
-import DonutCalc from '../views/DonutCalc.vue';
+import NotFound from "../views/NotFound.vue";
+import DonutCalc from "../views/DonutCalc.vue";
 
 Vue.use(Router);
 
@@ -26,11 +25,6 @@ export default new Router({
       path: "/donut",
       name: "donutCalc",
       component: DonutCalc,
-    },
-    {
-      path: "/letter",
-      name: "letter",
-      component: LetterSection,
     },
     {
       path: "*",

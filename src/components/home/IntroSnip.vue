@@ -4,14 +4,16 @@
       <v-container>
         <base-card tile flat class="ma-4">
           <v-row>
-            <v-col align="center">Welcome</v-col
-            ><v-col>
-              <h2 class="text4 text-wrap" style="font-size: 25px">
-                <p>
-                  We are the Troops of St. George-Troop 121 from the Church of
-                  St. Agnes in St. Paul, MN.
-                </p>
-              </h2>
+            <v-col align="center">
+              <base-subheading>Welcome</base-subheading>
+
+              <p class="text4 text-wrap" style="font-size: 25px">
+                We are the Troops of St. George-Troop 121 from the Church of St.
+                Agnes in St. Paul, MN.
+              </p>
+            </v-col>
+            <v-col align="center">
+              <v-img max-width="500" src="../../assets/stagnes.png" />
             </v-col>
           </v-row>
         </base-card>

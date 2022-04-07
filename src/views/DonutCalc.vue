@@ -96,7 +96,7 @@
 
             <v-sheet height="15" />
             <v-row
-              ><v-col align="center"
+              ><v-col  align="center"
                 ><strong>Total: $ {{ getTotal }}</strong></v-col
               ></v-row
             >
@@ -104,63 +104,65 @@
             <v-divider />
             <v-sheet height="15" />
             <v-row
-              ><v-col align="left"
-                ><strong>Amount Paid: $ {{ getPaid }} </strong></v-col
+              ><v-col  align="center"
+                ><strong v-if="this.paid > this.total" style="color: green;">Paid: $ {{ getPaid }} </strong>
+                <strong v-else>Paid: $ {{ getPaid }} </strong></v-col
               ></v-row
             >
             <v-row>
               <v-col>
-                <v-btn rounded>7</v-btn>
+                <v-btn @click="setPaid(7)" rounded>7</v-btn>
               </v-col>
               <v-col>
-                <v-btn rounded>8</v-btn>
+                <v-btn @click="setPaid(8)" rounded>8</v-btn>
               </v-col>
               <v-col>
-                <v-btn rounded>9</v-btn>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-btn rounded>4</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn rounded>5</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn rounded>6</v-btn>
+                <v-btn @click="setPaid(9)" rounded>9</v-btn>
               </v-col>
             </v-row>
             <v-row>
               <v-col>
-                <v-btn rounded>1</v-btn>
+                <v-btn @click="setPaid(4)" rounded>4</v-btn>
               </v-col>
               <v-col>
-                <v-btn rounded>2</v-btn>
+                <v-btn @click="setPaid(5)" rounded>5</v-btn>
               </v-col>
               <v-col>
-                <v-btn rounded>3</v-btn>
+                <v-btn @click="setPaid(6)" rounded>6</v-btn>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-btn @click="setPaid(1)" rounded>1</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="setPaid(2)" rounded>2</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn @click="setPaid(3)" rounded>3</v-btn>
               </v-col>
             </v-row>
             <v-row>
               <v-col> </v-col>
               <v-col>
-                <v-btn rounded>0</v-btn>
+                <v-btn @click="setPaid(0)" rounded>0</v-btn>
               </v-col>
-              <v-col> <v-btn rounded @click="setPaid">C</v-btn></v-col>
+              <v-col> <v-btn rounded @click="cReset">C</v-btn></v-col>
             </v-row>
             <v-sheet height="15" />
             <v-divider />
             <v-sheet height="15" />
             <v-row
-              ><v-col align="center"
-                ><strong>Change: $ {{ getChange }}</strong></v-col
+              ><v-col  align="center"
+                ><strong v-if="getChange > 0" style="color: red;" >Change: $ {{ getChange }}</strong>
+                <strong v-else>Change: $ {{ getChange }}</strong></v-col
               ></v-row
             >
             <v-divider />
             <v-sheet height="15" />
             <v-row
               ><v-col align="right"
-                ><v-btn @click="reset"><strong>Reset</strong></v-btn></v-col
+                ><v-btn @click="reset" color="rgb(35,140,227,.5)"><strong>Reset</strong></v-btn></v-col
               ></v-row
             >
           </div>
@@ -183,26 +185,26 @@ export default {
       drink: 0,
       total: 0,
       paid: 0,
+      displayPaid: [],
     };
   },
 
   computed: {
     getTotal() {
-      var num =
-        this.donut * 1.25 +
-        this.sandwhich * 3 +
-        this.coffee +
-        this.drink * 0.75;
-      return num.toFixed(2);
+      return this.total.toFixed(2);
     },
 
     getPaid() {
-      var num = this.paid;
-      return num.toFixed(2);
+      return this.paid.toFixed(2);
     },
     getChange() {
       var num = this.paid - this.total;
-      return num.toFixed(2);
+      if (num > 0) {
+        return num.toFixed(2);
+      } else {
+        num = 0;
+        return num.toFixed(2);
+      }
     },
   },
   methods: {
@@ -229,8 +231,12 @@ export default {
         this.drink * 0.75;
     },
 
-    setPaid() {
-      this.paid = 50;
+    setPaid(digit) {
+      this.displayPaid.push(digit);
+
+      var x = +this.displayPaid.join("");
+
+      this.paid = x * 0.01;
     },
 
     reset() {
@@ -239,6 +245,12 @@ export default {
       this.coffee = 0;
       this.drink = 0;
       this.total = 0;
+      this.displayPaid = [];
+      this.paid = 0;
+    },
+
+    cReset() {
+      this.displayPaid = [];
       this.paid = 0;
     },
   },

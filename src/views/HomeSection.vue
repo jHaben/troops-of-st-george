@@ -14,7 +14,7 @@
                       reverse-transition="fade-transition"
                       transition="fade-transition"
                       ><v-col align="center"
-                        ><v-img :src="item.src" max-height="445" contain
+                        ><v-img  :src="item.src" max-height="445" contain
                       /></v-col> </v-carousel-item
                   ></v-carousel>
                 </v-row>
@@ -53,7 +53,7 @@
                       reverse-transition="fade-transition"
                       transition="fade-transition"
                       ><v-col align="center"
-                        ><v-img :src="item.src"  
+                        ><v-img  min-height="275" :src="item.src"
                       /></v-col> </v-carousel-item
                   ></v-carousel>
                 </v-row>
@@ -78,8 +78,8 @@
     <inro-snip />
     <v-sheet height="75" color="rgb(235,243,243)" />
     <about-us />
-    <v-sheet height="75" color="rgb(235,243,243)" />
-    <meet-up id="meetUp" />
+    <!-- <v-sheet height="75" color="rgb(235,243,243)" />
+    <meet-up id="meetUp" /> -->
     <v-sheet height="75" color="rgb(235,243,243)" />
     <contact />
     <v-sheet height="75" color="rgb(235,243,243)" />
@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import MeetUp from "../components/home/MeetUp.vue";
+// import MeetUp from "../components/home/MeetUp.vue";
 import Contact from "../components/home/Contact.vue";
 import InroSnip from "../components/home/IntroSnip.vue";
 import AboutUs from "../components/home/AboutUs.vue";
@@ -97,34 +97,34 @@ export default {
     return {
       items: [
         {
-          src: require("../assets/groto.png"),
+          src: require("../assets/slide-show/hills.png"),
+        },
+
+        {
+          src: require("../assets/slide-show/fire-day.png"),
+        },
+
+        {
+          src: require("../assets/slide-show/mary-close.png"),
+        },
+
+        {
+          src: require("../assets/slide-show/ice.png"),
         },
         {
-          src: require("../assets/ice.png"),
+          src: require("../assets/slide-show/fire-night.png"),
         },
         {
-          src: require("../assets/barn-food.png"),
+          src: require("../assets/slide-show/mary.png"),
         },
         {
-          src: require("../assets/barn.jpg"),
+          src: require("../assets/slide-show/night.png"),
         },
         {
-          src: require("../assets/priest.jpg"),
+          src: require("../assets/slide-show/river-cross.png"),
         },
         {
-          src: require("../assets/dishes.jpg"),
-        },
-        {
-          src: require("../assets/firetruck.jpg"),
-        },
-        {
-          src: require("../assets/fishing.jpg"),
-        },
-        {
-          src: require("../assets/mary.jpg"),
-        },
-        {
-          src: require("../assets/Mass.jpg"),
+          src: require("../assets/slide-show/tent.png"),
         },
       ],
     };
@@ -148,7 +148,7 @@ export default {
   },
 
   components: {
-    MeetUp,
+    // MeetUp,
     Contact,
     InroSnip,
     AboutUs,

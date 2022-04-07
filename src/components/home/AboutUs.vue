@@ -1,13 +1,12 @@
 <template>
   <v-container id="aboutUs" tag="section">
-    <base-card>
-      <v-container>
-        <base-card flat class="ma-4">
+  
+        <base-card  >
           <v-row>
             <v-col align="center">
               <base-subheading>About the Troops</base-subheading>
             </v-col>
-            <div class="text4 text-wrap ma-4">
+            <div class="text4 text-wrap ma-8">
               <p>
                 Mission Statement “The Troops of Saint George apostolate aims to
                 use the outdoors as our canvas and the sacraments as our path to
@@ -22,8 +21,6 @@
           </v-row>
         </base-card>
       </v-container>
-    </base-card>
-  </v-container>
 </template>
 
 <script>
