@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <core-app-bar />
+    <core-donut-bar v-if="(this.$route.name == 'donut')" />
+    <core-app-bar v-else />
     <core-drawer />
     <v-sheet height="100%" color="rgb(235,243,243)">
       <core-view />

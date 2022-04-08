@@ -1,12 +1,13 @@
 <template>
   <div>
-    <v-sheet height="50" color="rgb(235,243,243)">
-      <center><h1>Donut Sunday Calculator</h1></center>
+    <v-sheet height="70" color="rgb(235,243,243)">
+      <center><h1>Donut Calculator</h1></center>
     </v-sheet>
-  <v-sheet height="20" color="rgb(211,62,39,1)" />
-    <v-container>
+    <v-sheet height="20" color="rgb(211,62,39,1)" />
+    <v-sheet height="40" color="rgb(235,243,243)" />
+    <v-container style="width: 280px">
       <center>
-        <base-card max-width="325" min-width="325">
+        <base-card max-width="325" min-width="280">
           <div style="font-size: 20px" class="ma-2 disable-dbl-tap-zoom">
             <v-row>
               <v-col
@@ -110,55 +111,61 @@
                 <strong v-else>Paid: $ {{ getPaid }} </strong></v-col
               ></v-row
             >
-            <v-row>
-              <v-col>
-                <v-btn @click="setPaid(7)" rounded>7</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(8)" rounded>8</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(9)" rounded>9</v-btn>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-btn @click="setPaid(4)" rounded>4</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(5)" rounded>5</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(6)" rounded>6</v-btn>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
-                <v-btn @click="setPaid(1)" rounded>1</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(2)" rounded>2</v-btn>
-              </v-col>
-              <v-col>
-                <v-btn @click="setPaid(3)" rounded>3</v-btn>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col> </v-col>
-              <v-col>
-                <v-btn @click="setPaid(0)" rounded>0</v-btn>
-              </v-col>
-              <v-col> <v-btn rounded @click="cReset">C</v-btn></v-col>
-            </v-row>
+            <v-container>
+              <v-row>
+                <v-col align="end">
+                  <v-row>
+                    <v-col align="end">
+                      <v-btn @click="setPaid(7)" rounded>7</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(8)" rounded>8</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(9)" rounded>9</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-btn @click="setPaid(4)" rounded>4</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(5)" rounded>5</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(6)" rounded>6</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col>
+                      <v-btn @click="setPaid(1)" rounded>1</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(2)" rounded>2</v-btn>
+                    </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(3)" rounded>3</v-btn>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col> </v-col>
+                    <v-col>
+                      <v-btn @click="setPaid(0)" rounded>0</v-btn>
+                    </v-col>
+                    <v-col> <v-btn rounded @click="cReset">C</v-btn></v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-container>
             <v-sheet height="15" />
             <v-divider />
             <v-sheet height="5" />
             <v-row
               ><v-col align="left"
                 ><strong v-if="getChange > 0" style="color: red"
-                  >Change: $ {{ getChange }}</strong
+                  >Change: <br />${{ getChange }}</strong
                 >
-                <strong v-else>Change: $ {{ getChange }}</strong></v-col
+                <strong v-else>Change: <br />${{ getChange }} </strong> </v-col
               ><v-col
                 ><v-btn @click="reset" color="rgb(35,140,227,.5)"
                   ><strong>Reset</strong></v-btn
@@ -261,9 +268,7 @@ export default {
 </script>
 
 <style>
-
 .disable-dbl-tap-zoom {
   touch-action: manipulation;
 }
-
 </style>

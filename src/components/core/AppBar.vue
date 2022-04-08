@@ -1,33 +1,30 @@
 <template>
-  <v-app-bar app color="rgb(235,243,243)" dark height="100">
+  <v-app-bar
+    :hide-on-scroll="hide"
+    app
+    color="rgb(235,243,243)"
+    dark
+    height="100"
+  >
     <v-container>
       <v-row class="d-flex flex-nowrap my-2">
-        <v-col>
+        <v-col align="center" style="max-width: 100px">
           <v-app-bar-nav-icon color="black" @click="toggleDrawer" />
         </v-col>
-        <v-col style="max-width: 300px">
+        <v-col  style="max-width: 300px">
           <v-img
             v-if="height <= 400"
-            class="my-1"
+            class="ma-2"
             alt="Troop 121 Logo"
             src="../../assets/logo.png"
             transition="scale-transition"
-            max-width="150"
-            contain
-          />
-
-          <v-img
-            v-else
-            class="my-1"
-            alt="Troop 121 Logo"
-            src="../../assets/logo.png"
-            transition="scale-transition"
-            max-height="80"
+            :max-width="height"
             contain
           />
         </v-col>
         <v-row class="d-flex flex-nowrap my-2">
-          <v-col align="center"
+          <v-col
+            align="center"
             class="hidden-sm-and-down"
             v-for="(link, i) in appBarLinks"
             :key="i"
@@ -86,17 +83,25 @@ export default {
     height() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return 220;
+          return 150;
         case "sm":
-          return 400;
+          return 150;
         case "md":
-          return 500;
+          return 200;
         case "lg":
-          return 600;
+          return 200;
         case "xl":
-          return 800;
+          return 200;
       }
-      return 1000;
+      return 200;
+    },
+
+    hide() {
+      if (this.$route.name === "donutCalc") {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 
