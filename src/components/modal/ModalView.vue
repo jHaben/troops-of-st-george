@@ -141,7 +141,7 @@ export default {
     async postData() {
       const postData = new FormData();
 
-      postData.append("to", 1);
+      postData.append("to", 3);
       postData.append("from", this.name);
       postData.append("subject", "tsg121.org");
       postData.append("text", this.message);

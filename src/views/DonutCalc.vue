@@ -1,19 +1,18 @@
 <template>
   <div>
     <v-sheet height="50" color="rgb(235,243,243)">
-      <center><h1>Donut Calculator</h1></center>
+      <center><h1>Donut Sunday Calculator</h1></center>
     </v-sheet>
-
-    <v-sheet height="20" color="rgb(211,62,39,1)" />
+  <v-sheet height="20" color="rgb(211,62,39,1)" />
     <v-container>
       <center>
         <base-card max-width="325" min-width="325">
-          <div style="font-size: 25px" class="ma-2">
+          <div style="font-size: 20px" class="ma-2 disable-dbl-tap-zoom">
             <v-row>
               <v-col
                 ><v-img
-                  max-height="50"
-                  max-width="50"
+                  max-height="40"
+                  max-width="40"
                   src="../assets/donutCalc/donut.png"
                 >
                 </v-img>
@@ -33,8 +32,8 @@
             <v-row>
               <v-col
                 ><v-img
-                  max-height="50"
-                  max-width="50"
+                  max-height="40"
+                  max-width="40"
                   src="../assets/donutCalc/bsandwhich.png"
                 >
                 </v-img>
@@ -54,8 +53,8 @@
             <v-row>
               <v-col
                 ><v-img
-                  max-height="50"
-                  max-width="50"
+                  max-height="40"
+                  max-width="40"
                   src="../assets/donutCalc/coffee.png"
                 >
                 </v-img>
@@ -75,8 +74,8 @@
             <v-row>
               <v-col
                 ><v-img
-                  max-height="50"
-                  max-width="50"
+                  max-height="40"
+                  max-width="40"
                   src="../assets/donutCalc/milk-juice.png"
                 >
                 </v-img>
@@ -94,18 +93,20 @@
               <v-col>{{ drink }}</v-col>
             </v-row>
 
-            <v-sheet height="15" />
+            <v-sheet height="5" />
             <v-row
-              ><v-col  align="center"
+              ><v-col align="center"
                 ><strong>Total: $ {{ getTotal }}</strong></v-col
               ></v-row
             >
-            <v-sheet height="15" />
+            <v-sheet height="5" />
             <v-divider />
-            <v-sheet height="15" />
+            <v-sheet height="5" />
             <v-row
-              ><v-col  align="center"
-                ><strong v-if="this.paid > this.total" style="color: green;">Paid: $ {{ getPaid }} </strong>
+              ><v-col align="center"
+                ><strong v-if="this.paid > this.total" style="color: green"
+                  >Paid: $ {{ getPaid }}
+                </strong>
                 <strong v-else>Paid: $ {{ getPaid }} </strong></v-col
               ></v-row
             >
@@ -151,26 +152,25 @@
             </v-row>
             <v-sheet height="15" />
             <v-divider />
-            <v-sheet height="15" />
+            <v-sheet height="5" />
             <v-row
-              ><v-col  align="center"
-                ><strong v-if="getChange > 0" style="color: red;" >Change: $ {{ getChange }}</strong>
+              ><v-col align="left"
+                ><strong v-if="getChange > 0" style="color: red"
+                  >Change: $ {{ getChange }}</strong
+                >
                 <strong v-else>Change: $ {{ getChange }}</strong></v-col
+              ><v-col
+                ><v-btn @click="reset" color="rgb(35,140,227,.5)"
+                  ><strong>Reset</strong></v-btn
+                ></v-col
               ></v-row
             >
+            <v-sheet height="5" />
             <v-divider />
-            <v-sheet height="15" />
-            <v-row
-              ><v-col align="right"
-                ><v-btn @click="reset" color="rgb(35,140,227,.5)"><strong>Reset</strong></v-btn></v-col
-              ></v-row
-            >
           </div>
-        </base-card>
-      </center></v-container
-    >
-    <v-sheet height="20" color="rgb(235,243,243)" />
-    <v-sheet height="75" color="rgb(235,243,243)" />
+        </base-card></center
+    ></v-container>
+    <v-sheet height="150" color="rgb(235,243,243)" />
   </div>
 </template>
 
@@ -259,3 +259,11 @@ export default {
   components: {},
 };
 </script>
+
+<style>
+
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
+
+</style>
