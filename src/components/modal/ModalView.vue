@@ -86,7 +86,7 @@
         </v-btn>
         <v-spacer />
         <v-btn
-          :disabled="!form"
+          :disabled="!form || !robot"
           :loading="isLoading"
           class="white--text"
           color="#272727"
@@ -186,7 +186,8 @@ export default {
 
   watch: {
     dialog: function (val) {
-      if (val) {
+      if (!val) {
+         this.$refs.form.reset();
         this.name = "";
         this.email = "";
         this.message = "";
