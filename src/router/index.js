@@ -4,10 +4,10 @@ import HomeSection from "../views/HomeSection.vue";
 // import UnderConstruction from "../views/UnderConstruction.vue"
 import NotFound from "../views/NotFound.vue";
 import DonutCalc from "../views/DonutCalc.vue";
-
+import LoginPage from "../views/LoginPage.vue";
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -31,6 +31,15 @@ export default new Router({
       name: "Not Found",
       component: NotFound,
     },
+    {
+      path: "/admin",
+      name: "admin",
+      component: () => import("../views/AdminSection"),
+    },
+    {
+      path: "/login",
+      component: LoginPage,
+    },
   ],
 
   scrollBehavior: function (to) {
@@ -49,3 +58,19 @@ export default new Router({
     });
   },
 });
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ["/login", "/donut", "/"];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem("user");
+
+  // trying to access a restricted page + not logged in
+  // redirect to login page
+  if (authRequired && !loggedIn) {
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+export default router;

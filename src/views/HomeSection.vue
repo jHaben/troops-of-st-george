@@ -14,7 +14,7 @@
                       reverse-transition="fade-transition"
                       transition="fade-transition"
                       ><v-col align="center"
-                        ><v-img  :src="item.src" max-height="445" contain
+                        ><v-img :src="item.src" max-height="445" contain
                       /></v-col> </v-carousel-item
                   ></v-carousel>
                 </v-row>
@@ -53,7 +53,7 @@
                       reverse-transition="fade-transition"
                       transition="fade-transition"
                       ><v-col align="center"
-                        ><v-img  min-height="275" :src="item.src"
+                        ><v-img min-height="275" :src="item.src"
                       /></v-col> </v-carousel-item
                   ></v-carousel>
                 </v-row>
@@ -74,15 +74,17 @@
     </v-sheet>
 
     <v-sheet height="20" color="rgb(211,62,39,1)" />
-    <v-sheet height="20" color="rgb(235,243,243)" />
+    <!-- <v-sheet height="20" color="rgb(235,243,243)" /> -->
     <inro-snip />
-    <v-sheet height="75" color="rgb(235,243,243)" />
-    <about-us />
-    <!-- <v-sheet height="75" color="rgb(235,243,243)" />
-    <meet-up id="meetUp" /> -->
-    <v-sheet height="75" color="rgb(235,243,243)" />
+    <v-sheet height="100%" color="#6698b3">
+      <about-us />
+    </v-sheet>
+
+    <v-sheet height="100%" color="white">
+      <meet-up id="meetUp" />
+    </v-sheet>
+
     <contact />
-    <v-sheet height="75" color="rgb(235,243,243)" />
   </div>
 </template>
 
@@ -91,6 +93,7 @@
 import Contact from "../components/home/Contact.vue";
 import InroSnip from "../components/home/IntroSnip.vue";
 import AboutUs from "../components/home/AboutUs.vue";
+import MeetUp from "../components/home/MeetUp.vue";
 export default {
   name: "HomeSection",
   data() {
@@ -148,7 +151,7 @@ export default {
   },
 
   components: {
-    // MeetUp,
+    MeetUp,
     Contact,
     InroSnip,
     AboutUs,

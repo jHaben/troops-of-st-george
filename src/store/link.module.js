@@ -17,14 +17,14 @@ export const links = {
         bottom: true,
         top: true,
       },
-      // {
-      //   text: "Calendar",
-      //   href: "#meetUp",
-      //   icon: "mdi-calendar",
-      //   last: false,
-      //   bottom: true,
-      //   top: true,
-      // },
+      {
+        text: "Calendar",
+        href: "#meetUp",
+        icon: "mdi-calendar",
+        last: false,
+        bottom: true,
+        top: true,
+      },
       {
         text: "Donut",
         href: "/donut",

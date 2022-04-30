@@ -10,19 +10,18 @@
       >
         {{ "mdi-email" }}
       </v-icon>
-
       <v-btn
         v-else
         v-bind="attrs"
         v-on="on"
         @click="openModal"
         class="emailBtn ma-1 text4"
-        style="font-size: 20px;"
+        style="font-size: 20px; opacity:100; background-color:white"
         outlined
         depressed
         x-large
         elevation="3"
-        >{{"E-Mail"}}<v-icon right>{{ "mdi-email" }}</v-icon></v-btn
+        ><v-icon left>{{ "mdi-email" }}</v-icon>{{ "E-Mail" }}</v-btn
       >
     </template>
     <v-card>
@@ -69,6 +68,14 @@
                   type="text"
                 ></v-textarea>
               </v-col>
+              <v-col>
+                <vue-recaptcha
+                  ref="recaptcha"
+                  @verify="onVerify"
+                  :sitekey="siteKey"
+                >
+                </vue-recaptcha
+              ></v-col>
             </v-row>
           </v-container>
         </v-card-text>
@@ -96,8 +103,12 @@
 <script>
 // Utilities
 import http from "../../services/http-common";
+import { VueRecaptcha } from "vue-recaptcha";
 export default {
   name: "ModalView",
+  components: {
+    VueRecaptcha,
+  },
   data: () => ({
     postResult: null,
     name: undefined,
@@ -106,6 +117,8 @@ export default {
     email: undefined,
     form: false,
     isLoading: false,
+    robot: false,
+    siteKey: "6LfvobMfAAAAADWD74D6r-hpF4qI2cnjCXuEbmfu",
     rules: {
       email: (v) => !!(v || "").match(/@/) || "Please enter a valid email",
       nameCounter: (value) =>
@@ -124,6 +137,9 @@ export default {
   }),
   props: { showIcon: Boolean },
   methods: {
+    onVerify(response) {
+      if (response) this.robot = true;
+    },
     close() {
       this.$emit("close");
     },
@@ -139,26 +155,28 @@ export default {
       return JSON.stringify(res, null, 1);
     },
     async postData() {
-      const postData = new FormData();
+      if (this.robot) {
+        const postData = new FormData();
 
-      postData.append("to", 3);
-      postData.append("from", this.name);
-      postData.append("subject", "tsg121.org");
-      postData.append("text", this.message);
-      postData.append("email", this.email);
-      try {
-        const res = await http.post("/mail/send", postData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-        const result = {
-          status: res.status + "-" + res.statusText,
-          headers: res.headers,
-          data: res.data,
-        };
-        this.postResult = this.fortmatResponse(result);
-      } catch (err) {
-        this.postResult = this.fortmatResponse(err.response?.data) || err;
-        alert("The e-mail did not get sent. Please try again later.");
+        postData.append("to", 3);
+        postData.append("from", this.name);
+        postData.append("subject", "tsg121.org");
+        postData.append("text", this.message);
+        postData.append("email", this.email);
+        try {
+          const res = await http.post("/mail/send", postData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          });
+          const result = {
+            status: res.status + "-" + res.statusText,
+            headers: res.headers,
+            data: res.data,
+          };
+          this.postResult = this.fortmatResponse(result);
+        } catch (err) {
+          this.postResult = this.fortmatResponse(err.response?.data) || err;
+          alert("The e-mail did not get sent. Please try again later.");
+        }
       }
     },
     clearPostOutput() {
