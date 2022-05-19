@@ -77,10 +77,13 @@
     <!-- <v-sheet height="20" color="rgb(235,243,243)" /> -->
     <inro-snip />
     <v-sheet height="100%" color="#6698b3">
+      <icon-banner/>
+    </v-sheet>
+        <v-sheet height="100%" color="white">
       <about-us />
     </v-sheet>
 
-    <v-sheet height="100%" color="white">
+    <v-sheet height="100%" color="#6698b3">
       <meet-up id="meetUp" />
     </v-sheet>
 
@@ -89,11 +92,12 @@
 </template>
 
 <script>
-// import MeetUp from "../components/home/MeetUp.vue";
 import Contact from "../components/home/Contact.vue";
 import InroSnip from "../components/home/IntroSnip.vue";
 import AboutUs from "../components/home/AboutUs.vue";
 import MeetUp from "../components/home/MeetUp.vue";
+import IconBanner from "../components/home/IconBanner.vue"
+
 export default {
   name: "HomeSection",
   data() {
@@ -154,6 +158,7 @@ export default {
     MeetUp,
     Contact,
     InroSnip,
+    IconBanner,
     AboutUs,
   },
 };

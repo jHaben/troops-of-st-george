@@ -1,114 +1,12 @@
+
 <template>
   <v-container id="aboutUs" tag="section">
-    <base-card tile flat color="#6698b3">
-      <v-row>
-        <v-col>
-          <v-container>
-            <base-card
-              color="transparent"
-              tile
-              flat
-              min-width="130"
-              class="ma-4"
-              style="color: white; font-size: 20px; text-align: center"
-            >
-              <v-row justify="center" class="mb-4">
-                <v-icon size="60" color="white"> {{ "mdi-church" }}</v-icon>
-              </v-row>
-              <v-row justify="center">CATHOLIC</v-row>
-              <v-divider style="border-width: 3px" dark class="my-9" />
-              <v-row justify="center" style="font-size: 15px"> </v-row>
-            </base-card>
-          </v-container>
-        </v-col>
-        <v-col>
-          <v-container>
-            <base-card
-              color="transparent"
-              tile
-              flat
-              min-width="130"
-              class="ma-4"
-              style="color: white; font-size: 20px; text-align: center"
-            >
-              <v-row justify="center" class="mb-4">
-                <v-icon size="60" color="white"> {{ "mdi-campfire" }}</v-icon>
-              </v-row>
-              <v-row justify="center">OUTDOORS</v-row>
-              <v-divider style="border-width: 3px" dark class="my-9" />
-              <v-row justify="center" style="font-size: 15px"> </v-row>
-            </base-card>
-          </v-container>
-        </v-col>
-
-        <v-col>
-          <v-container>
-            <base-card
-              color="transparent"
-              tile
-              flat
-              min-width="130"
-              class="ma-4"
-              style="color: white; font-size: 20px; text-align: center"
-            >
-              <v-row justify="center" class="mb-4">
-                <v-icon size="60" color="white">
-                  {{ "mdi-shield-cross" }}</v-icon
-                >
-              </v-row>
-              <v-row justify="center">TRADITION</v-row>
-              <v-divider style="border-width: 3px" dark class="my-9" />
-              <v-row justify="center" style="font-size: 15px"> </v-row>
-            </base-card>
-          </v-container>
-        </v-col>
-        <v-col>
-          <v-container>
-            <base-card
-              color="transparent"
-              tile
-              flat
-              min-width="130"
-              class="ma-4"
-              style="color: white; font-size: 20px; text-align: center"
-            >
-              <v-row justify="center" class="mb-4">
-                <v-icon size="60" color="white">
-                  {{ "mdi-handshake-outline" }}</v-icon
-                >
-              </v-row>
-              <v-row justify="center">BROTHERHOOD</v-row>
-              <v-divider style="border-width: 3px" dark class="my-9" />
-              <v-row justify="center" style="font-size: 15px"> </v-row>
-            </base-card>
-          </v-container>
-        </v-col>
-
-        <v-col>
-          <v-container>
-            <base-card
-              color="transparent"
-              tile
-              flat
-              min-width="130"
-              class="ma-4"
-              style="color: white; font-size: 20px; text-align: center"
-            >
-              <v-row justify="center" class="mb-4">
-                <v-icon size="60" color="white"> {{ "mdi-flag" }}</v-icon>
-              </v-row>
-              <v-row justify="center">PATRIOTISM</v-row>
-              <v-divider style="border-width: 3px" dark class="my-9" />
-              <v-row justify="center" style="font-size: 15px"> </v-row>
-            </base-card>
-          </v-container>
-        </v-col>
-      </v-row>
-      <v-row style="color:white">
+    <base-card tile flat color="white">
+      <v-row style="color: black">
         <v-col align="center">
           <base-subheading>About the Troops</base-subheading>
         </v-col>
-        <div class="text4 text-wrap ma-8" style="color:white; font-size: 25px;">
+        <div class="text4 text-wrap ma-8" style="color: black; font-size: 25px">
           <p>
             Mission Statement “The Troops of Saint George apostolate aims to use
             the outdoors as our canvas and the sacraments as our path to light
@@ -126,28 +24,11 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+
 
 export default {
   name: "HomeAboutUs",
 
-  computed: {
-    ...mapGetters(["appBarLinks"]),
-  },
-
-  methods: {
-    ...mapMutations(["toggleDrawer"]),
-    onClick(e, item) {
-      e.stopPropagation();
-
-      if (item.to || !item.href) return;
-
-      if (this.$route.name != "home") {
-        this.$router.push({ name: "home" });
-      } else {
-        this.$vuetify.goTo(item.href, { duration: 500, easing: "linear" });
-      }
-    },
-  },
 };
 </script>
+
