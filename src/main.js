@@ -6,7 +6,7 @@ import store from "./store";
 import "./assets/main.css";
 import vuetify from "./plugins/vuetify";
 import "vuetify/dist/vuetify.min.css";
-import VeeValidate from 'vee-validate/dist/vee-validate';
+import * as VeeValidate from 'vee-validate';
 
 Vue.config.productionTip = false;
 
