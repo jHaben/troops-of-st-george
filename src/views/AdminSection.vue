@@ -30,7 +30,7 @@
                     >
                   </template>
                   <v-card>
-                    <v-form ref="form" v-model="form" lazy-validation class="pa-4 pt-6">
+                    <v-form ref="form" v-model="form"  class="pa-4 pt-6">
                       <v-card-title>
                         <span class="text-h5">Create Event</span>
                       </v-card-title>
