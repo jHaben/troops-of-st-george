@@ -205,7 +205,7 @@
                           </v-row>
                         </v-card>
                       </v-container>
-                    </v-form>
+                  
 
                     <v-card-actions>
                       <v-btn
@@ -226,6 +226,7 @@
                         Cancel
                       </v-btn>
                     </v-card-actions>
+                   </v-form>
                   </v-card>
                 </v-dialog>
               </v-row>
