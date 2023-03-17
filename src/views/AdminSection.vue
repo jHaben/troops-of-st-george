@@ -151,7 +151,7 @@
                                 </v-menu>
                               </v-col>
                             </v-row>
-                            <v-row align="center" class="ma-4">
+                            <v-row class="ma-4">
                               <v-col cols="6">
                                 <v-select
                                   :style="select.style"
