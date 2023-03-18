@@ -1,64 +1,49 @@
 <template>
   <v-container>
     <v-sheet color="transparent" height="100" />
-    <v-card color="transparent" flat tile>
-      <div>
-        <form name="form" v-on:keyup.enter="handleLogin">
-          <div class="ma-16">
-            <label for="username"><h2>Username:</h2> </label>
-            <br />
-            <input
-              style="background-color: white; border-style: outset"
-              v-model="user.username"
-              v-validate="'required'"
-              type="text"
-              class="form-control"
-              name="username"
-              autocomplete="on"
-            />
+    <v-card align="center" color="transparent" flat tile>
 
-            <div
-              v-if="errors.has('username')"
-              class="alert alert-danger"
-              style="color: red"
-              role="alert"
-            >
-              Username is required!
+      <v-card align="center" height="400" width="400">
+        <div>
+          <form name="form" v-on:keyup.enter="handleLogin">
+            <div class="ma-16">
+              <label for="username">
+                <h2>Username</h2>
+              </label>
+              <br />
+              <input style="background-color: white; border-style: outset" v-model="user.username" v-validate="'required'"
+                type="text" class="form-control" name="username" autocomplete="on" />
+
+              <div v-if="errors.has('username')" class="alert alert-danger" style="color: red" role="alert">
+                Username is required!
+              </div>
             </div>
-          </div>
-          <div class="ma-16">
-            <label for="password"><h2>Password:</h2></label>
-            <br />
-            <input
-              style="background-color: white; border-style: outset"
-              v-model="user.password"
-              v-validate="'required'"
-              type="password"
-              class="form-control"
-              name="password"
-              autocomplete="on"
-            />
-            <div v-if="message" style="color: red" role="alert">
-              {{ message }}
+            <div class="ma-16">
+              <label for="password">
+                <h2>Password</h2>
+              </label>
+              <br />
+              <input style="background-color: white; border-style: outset" v-model="user.password" v-validate="'required'"
+                type="password" class="form-control" name="password" autocomplete="on" />
+              <div v-if="message" style="color: red" role="alert">
+                {{ message }}
+              </div>
+              <div v-if="errors.has('password')" style="color: red" role="alert">
+                Password is required!
+              </div>
             </div>
-            <div v-if="errors.has('password')" style="color: red" role="alert">
-              Password is required!
+            <vue-recaptcha ref="recaptcha" @verify="onVerify" :sitekey="siteKey">
+            </vue-recaptcha>
+            <div class="ma-16">
+              <v-btn :disabled="loading || !robot" @click="handleLogin">
+                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                <span>Login</span>
+              </v-btn>
             </div>
-          </div>
-          <vue-recaptcha ref="recaptcha" @verify="onVerify" :sitekey="siteKey">
-          </vue-recaptcha>
-          <div class="ma-16">
-            <v-btn :disabled="loading || !robot" @click="handleLogin">
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span>
-              <span>Login</span>
-            </v-btn>
-          </div>
-          <div class="form-group"></div>
-        </form>
-      </div>
+            <div class="form-group"></div>
+          </form>
+        </div>
+      </v-card>
     </v-card>
   </v-container>
 </template>

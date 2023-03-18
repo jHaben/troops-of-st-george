@@ -3,6 +3,7 @@ import authHeader from "./auth-header";
 
 const API_URL = "https://jserv.jackhaben.com/";
 
+// const API_URL = "http://localhost:5000/";
 
 class UserService {
   getEvents() {
@@ -14,8 +15,8 @@ class UserService {
   }
 
 
-  addMember(data) {
-    return axios.post(API_URL + "member/add", data);
+  addUser(data) {
+    return axios.post(API_URL + "member/add", data, { headers: authHeader()});
   }
 
   deleteEvent(data) {

@@ -1,8 +1,10 @@
 import axios from "axios";
 
-const API_URL = "https://jserv.jackhaben.com/";
 
 
+ const API_URL = "https://jserv.jackhaben.com/";
+
+// const API_URL = "http://localhost:5000/";
 
 
 class AuthService {

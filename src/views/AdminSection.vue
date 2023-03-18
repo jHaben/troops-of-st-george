@@ -15,22 +15,11 @@
               <v-row justify="center">
                 <v-dialog v-model="dialog2" persistent max-width="1000">
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      style="background-color: white"
-                      v-bind="attrs"
-                      v-on="on"
-                      outlined
-                      depressed
-                      rounded
-                      color="black"
-                      small
-                      elevation="3"
-                      ><v-icon left>{{ "mdi-calendar" }}</v-icon
-                      >Add</v-btn
-                    >
+                    <v-btn style="background-color: white" v-bind="attrs" v-on="on" outlined depressed rounded
+                      color="black" small elevation="3"><v-icon left>{{ "mdi-calendar" }}</v-icon>Add Event</v-btn>
                   </template>
                   <v-card>
-                    <v-form ref="form" v-model="form"  class="pa-4 pt-6">
+                    <v-form ref="form" v-model="valid" class="pa-4 pt-6">
                       <v-card-title>
                         <span class="text-h5">Create Event</span>
                       </v-card-title>
@@ -38,195 +27,208 @@
                       <v-container>
                         <v-card flat tile>
                           <v-row>
+                            <v-container>
+                              <v-card flat tile>
+                                <v-row>
+                                  <v-col>
+                                    <v-text-field label="Event Name" counter maxlength="20" required
+                                      :rules="[v => !!v || 'Event Name is required']" v-model="name"></v-text-field>
+                                  </v-col>
+                                </v-row>
+                              </v-card></v-container>
+
+
+                              <v-container>
+                              <v-card flat tile>
                             <v-row>
-                              <v-col>
-                                <v-text-field
-                                  label="Event Name"
-                                  counter
-                                  maxlength="20"
-                                  required
-                                  v-model="name"
-                                ></v-text-field>
-                              </v-col>
-                            </v-row>
-                            <v-row>
-                              <v-col>
-                                <v-container>
-                                  <v-date-picker
-                                    v-model="dates"
-                                    multiple
-                                    required
-                                    value="YYYY-mm-dd"
-                                  ></v-date-picker>
+                              <v-col align="center">
+                                <v-container >
+                                  <v-date-picker ref="dates" v-model="dates" multiple required
+                                    value="YYYY-mm-dd"></v-date-picker>
                                 </v-container>
                               </v-col>
+                            </v-row>
+                              <v-col>
+                                <v-menu ref="menu" v-model="menu" :close-on-content-click="false"
+                                  :return-value.sync="dates" transition="scale-transition" offset-y min-width="auto">
+                                  <template v-slot:activator="{ on, attrs }">
+                                    <v-combobox v-model="dates" multiple chips small-chips label="Selected Dates"
+                                      :rules="[v => (v && v.length > 0) || 'At least one date is required']"
+                                      prepend-icon="mdi-calendar" readonly v-bind="attrs" v-on="on"></v-combobox>
+                                  </template>
+                                </v-menu>
+                              </v-col>
+                              <v-row>
+                            </v-row>
 
-                              <v-col>
-                                <v-menu
-                                  ref="menu"
-                                  v-model="menu"
-                                  :close-on-content-click="false"
-                                  :return-value.sync="dates"
-                                  transition="scale-transition"
-                                  offset-y
-                                  min-width="auto"
-                                >
-                                  <template v-slot:activator="{ on, attrs }">
-                                    <v-combobox
-                                      v-model="dates"
-                                      multiple
-                                      chips
-                                      small-chips
-                                      label="Selected Dates"
-                                      prepend-icon="mdi-calendar"
-                                      readonly
-                                      v-bind="attrs"
-                                      v-on="on"
-                                    ></v-combobox>
-                                  </template>
-                                </v-menu>
-                              </v-col>
-                            </v-row>
-                            <v-row>
-                              <v-col>
-                                <v-menu
-                                  ref="menu1"
-                                  v-model="menu1"
-                                  :close-on-content-click="false"
-                                  :nudge-right="40"
-                                  :return-value.sync="startTime"
-                                  transition="scale-transition"
-                                  offset-y
-                                  max-width="290px"
-                                  min-width="290px"
-                                >
-                                  <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field
-                                      v-model="startTime"
-                                      label="Pick start time."
-                                      prepend-icon="mdi-clock-time-four-outline"
-                                      required
-                                      readonly
-                                      v-bind="attrs"
-                                      v-on="on"
-                                    ></v-text-field>
-                                  </template>
-                                  <v-time-picker
-                                    v-if="menu1"
-                                    v-model="startTime"
-                                    full-width
-                                    @click:minute="$refs.menu1.save(startTime)"
-                                  ></v-time-picker>
-                                </v-menu>
-                              </v-col>
-                              <v-col>
-                                <v-menu
-                                  ref="menu2"
-                                  v-model="menu2"
-                                  :close-on-content-click="false"
-                                  :nudge-right="40"
-                                  :return-value.sync="endTime"
-                                  transition="scale-transition"
-                                  offset-y
-                                  max-width="290px"
-                                  min-width="290px"
-                                >
-                                  <template v-slot:activator="{ on, attrs }">
-                                    <v-text-field
-                                      v-model="endTime"
-                                      label="Pick end time."
-                                      prepend-icon="mdi-clock-time-four-outline"
-                                      required
-                                      readonly
-                                      v-bind="attrs"
-                                      v-on="on"
-                                    ></v-text-field>
-                                  </template>
-                                  <v-time-picker
-                                    v-if="menu2"
-                                    v-model="endTime"
-                                    full-width
-                                    @click:minute="$refs.menu2.save(endTime)"
-                                  ></v-time-picker>
-                                </v-menu>
-                              </v-col>
-                            </v-row>
-                            <v-row class="ma-4">
-                              <v-col cols="6">
-                                <v-select
-                                  :style="select.style"
-                                  v-model="select"
-                                  :items="items"
-                                  item-text="name"
-                                  label="Color"
-                                  persistent-hint
-                                  return-object
-                                  single-line
-                                  @change="colorChange(select.color)"
-                                >
-                                  <template #item="{ item }">
-                                    <v-icon :color="item.name">{{
-                                      item.name
-                                    }}</v-icon>
-                                  </template></v-select
-                                >
-                              </v-col>
-                            </v-row>
-                            <v-row>
-                              <v-col class="ma-4">
-                                <v-textarea
-                                  v-model="address"
-                                  counter
-                                  maxlength="100"
-                                  auto-grow
-                                  color="#272727"
-                                  label="Address"
-                                  outlined
-                                  rows="3"
-                                  type="text"
-                                ></v-textarea>
-                              </v-col>
-                            </v-row>
-                            <v-row>
-                              <v-col class="ma-4">
-                                <v-textarea
-                                  v-model="details"
-                                  counter
-                                  maxlength="100"
-                                  auto-grow
-                                  color="#272727"
-                                  label="Details"
-                                  outlined
-                                  rows="5"
-                                  type="text"
-                                ></v-textarea>
-                              </v-col>
-                            </v-row>
+                          </v-card></v-container>
+                            <v-container>
+                              <v-card flat tile>
+                                <v-row>
+                                  <v-col>
+                                    <v-menu ref="menu1" v-model="menu1" :close-on-content-click="false" :nudge-right="40"
+                                      :return-value.sync="startTime" transition="scale-transition" offset-y
+                                      max-width="290px" min-width="290px">
+                                      <template v-slot:activator="{ on, attrs }">
+                                        <v-text-field v-model="startTime" label="Pick start time."
+                                          prepend-icon="mdi-clock-time-four-outline" required
+                                          :rules="[v => !!v || 'Start time is required']" readonly v-bind="attrs"
+                                          v-on="on"></v-text-field>
+                                      </template>
+                                      <v-time-picker v-if="menu1" v-model="startTime" full-width
+                                        @click:minute="$refs.menu1.save(startTime)"></v-time-picker>
+                                    </v-menu>
+                                  </v-col>
+                                  <v-col>
+                                    <v-menu ref="menu2" v-model="menu2" :close-on-content-click="false" :nudge-right="40"
+                                      :return-value.sync="endTime" transition="scale-transition" offset-y
+                                      max-width="290px" min-width="290px">
+                                      <template v-slot:activator="{ on, attrs }">
+                                        <v-text-field v-model="endTime" label="Pick end time."
+                                          :rules="[v => !!v || 'End time is required']"
+                                          prepend-icon="mdi-clock-time-four-outline" required readonly v-bind="attrs"
+                                          v-on="on"></v-text-field>
+                                      </template>
+                                      <v-time-picker v-if="menu2" v-model="endTime" full-width
+                                        @click:minute="$refs.menu2.save(endTime)"></v-time-picker>
+                                    </v-menu>
+                                  </v-col>
+                                </v-row>
+                              </v-card></v-container>
+                            <v-container>
+                              <v-card flat tile>
+                                <v-row>
+                                  <v-col class="ma-4">
+                                    <v-textarea v-model="address" required :rules="[v => !!v || 'Address is required']"
+                                      counter maxlength="100" auto-grow color="#272727" label="Address" outlined rows="3"
+                                      type="text"></v-textarea>
+                                  </v-col>
+                                </v-row>
+                              </v-card></v-container>
+                            <v-container>
+                              <v-card flat tile>
+                                <v-row>
+                                  <v-col class="ma-4">
+                                    <v-textarea v-model="details" required :rules="[v => !!v || 'Details are required']"
+                                      counter maxlength="200" auto-grow color="#272727" label="Details" outlined rows="5"
+                                      type="text"></v-textarea>
+                                  </v-col>
+                                </v-row>
+                              </v-card></v-container>
                           </v-row>
                         </v-card>
                       </v-container>
-                  
+                    </v-form>
 
                     <v-card-actions>
-                      <v-btn
-                        :disabled="!form"
-                        color="black"
-                        text
-                        @click="submit()"
-                      >
+                      <v-btn :disabled="!valid" color="green" text @click="submit()">
                         Create
                       </v-btn>
 
                       <v-spacer />
-                      <v-btn
-                        color="black"
-                        text
-                        @click="(dialog2 = false), close()"
-                      >
+                      <v-btn color="red" text @click="(dialog2 = false), close()">
                         Cancel
                       </v-btn>
                     </v-card-actions>
-                   </v-form>
+                  </v-card>
+                </v-dialog>
+              </v-row>
+              <v-spacer />
+
+              <v-row justify="center">
+                <v-dialog v-model="dialog3" persistent max-width="1000">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn style="background-color: white" v-bind="attrs" v-on="on" outlined depressed rounded
+                      color="black" small elevation="3"><v-icon left>{{ "mdi-head" }}</v-icon>Add User</v-btn>
+                  </template>
+                  <v-card>
+                    <v-form ref="form" v-model="valid" class="pa-4 pt-6">
+                      <v-card-title>
+                        <span class="text-h5">Add User</span>
+                      </v-card-title>
+                      <v-container>
+                        <v-card flat tile>
+                          <v-row>
+                         
+                              <v-textarea v-model="username" required :rules="[v => !!v || 'Username is required']"
+                                counter maxlength="15" color="#272727" label="Username" outlined 
+                                type="text" dense cols="20"></v-textarea>
+                          
+                          </v-row>
+                        </v-card></v-container>
+                      <v-container>
+                        <v-card flat tile>
+                          <v-row>
+                        
+                              <v-textarea v-model="password" required :rules="[v => !!v || 'Password is required']"
+                                counter maxlength="12" minlength="6"  color="#272727" label="Password" outlined
+                                 type="text" dense cols="20"></v-textarea>
+                            
+                          </v-row>
+                        </v-card></v-container>
+
+                    </v-form>
+
+                    <v-card-actions>
+                      <v-btn :disabled="!valid" color="green" text @click="submit2()">
+                        Create
+                      </v-btn>
+
+                      <v-spacer />
+                      <v-btn color="red" text @click="(dialog3 = false), close()">
+                        Cancel
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-row>
+              <v-spacer />
+
+              <v-row justify="center">
+                <v-dialog v-model="dialog3" persistent max-width="1000">
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn style="background-color: white" v-bind="attrs" v-on="on" outlined depressed rounded
+                      color="black" small elevation="3"><v-icon left>{{ "mdi-head" }}</v-icon>Add User</v-btn>
+                  </template>
+                  <v-card>
+                    <v-form ref="form" v-model="valid" class="pa-4 pt-6">
+                      <v-card-title>
+                        <span class="text-h5">Add User</span>
+                      </v-card-title>
+                      <v-container>
+                        <v-card flat tile>
+                          <v-row>
+
+                            <v-textarea v-model="username" required :rules="[v => !!v || 'Username is required']" counter
+                              maxlength="15" color="#272727" label="Username" outlined type="text" dense
+                              cols="20"></v-textarea>
+
+                          </v-row>
+                        </v-card></v-container>
+                      <v-container>
+                        <v-card flat tile>
+                          <v-row>
+
+                            <v-textarea v-model="password" required :rules="[v => !!v || 'Password is required']" counter
+                              maxlength="12" minlength="6" color="#272727" label="Password" outlined type="text" dense
+                              cols="20"></v-textarea>
+
+                          </v-row>
+                        </v-card></v-container>
+
+                    </v-form>
+
+                    <v-card-actions>
+                      <v-btn :disabled="!valid" color="green" text @click="submit2()">
+                        Create
+                      </v-btn>
+
+                      <v-spacer />
+                      <v-btn color="red" text @click="(dialog3 = false), close()">
+                        Cancel
+                      </v-btn>
+                    </v-card-actions>
+
                   </v-card>
                 </v-dialog>
               </v-row>
@@ -234,13 +236,7 @@
               <v-col>
                 <h3>{{ currentUser }}</h3>
 
-                <v-btn
-                  class="ml-4"
-                  light
-                  rounded
-                  x-small
-                  @click.prevent="logOut"
-                  >LogOut
+                <v-btn class="ml-4" light rounded x-small @click.prevent="logOut">LogOut
                 </v-btn>
               </v-col>
             </v-toolbar>
@@ -265,13 +261,7 @@
               <v-spacer />
               <v-menu>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    small
-                    outlined
-                    color="grey darken-2"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
+                  <v-btn small outlined color="grey darken-2" v-bind="attrs" v-on="on">
                     <span>{{ typeToLabel[type] }}</span>
                     <v-icon right> mdi-menu-down </v-icon>
                   </v-btn>
@@ -288,30 +278,13 @@
             </v-toolbar>
           </v-sheet>
           <v-sheet height="550">
-            <v-calendar
-              ref="calendar"
-              v-model="focus"
-              color="primary"
-              :weekdays="weekday"
-              :type="type"
-              show-month-on-first
-              :events="displayEvents"
-              :event-overlap-mode="mode"
-              :event-overlap-threshold="30"
-              @click:event="showEvent"
-              @click:more="viewWeek"
-            ></v-calendar>
-            <v-menu
-              v-model="selectedOpen"
-              :close-on-content-click="false"
-              :activator="selectedElement"
-              offset-x
-            >
+            <v-calendar ref="calendar" v-model="focus" color="primary" :weekdays="weekday" :type="type"
+              show-month-on-first :events="displayEvents" :event-overlap-mode="mode" :event-overlap-threshold="30"
+              @click:event="showEvent" @click:more="viewWeek"></v-calendar>
+            <v-menu v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x>
               <v-card color="grey lighten-4" min-width="150px" flat>
                 <v-toolbar :color="selectedEvent.color" dark>
-                  <v-toolbar-title
-                    v-html="selectedEvent.name"
-                  ></v-toolbar-title>
+                  <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
                   <v-spacer></v-spacer>
 
                   <v-row justify="center">
@@ -328,11 +301,7 @@
                           {{ selectedEvent.eventID }} ?
                         </v-card-title>
                         <v-card-actions>
-                          <v-btn
-                            color="red"
-                            text
-                            @click="deleteEvent(selectedEvent.eventID)"
-                          >
+                          <v-btn color="red" text @click="deleteEvent(selectedEvent.eventID)">
                             Yes
                           </v-btn>
 
@@ -374,9 +343,10 @@ import UserService from "../services/user.service";
 export default {
   name: "AdminSection",
   data: () => ({
-    form: false,
+    valid: false,
     dialog1: false,
     dialog2: false,
+    dialog3: false,
     type: "month",
     mode: "stack",
     weekday: [0, 1, 2, 3, 4, 5, 6],
@@ -388,31 +358,12 @@ export default {
     name: undefined,
     startTime: "",
     endTime: "",
-    select: {
-      name: "purple",
-      style: "background-color:#694bb7;",
-      color: "#694bb7",
-    },
-    items: [
-      { name: "purple", style: "background-color:#694bb7;", color: "#694bb7" },
-      {
-        name: "blue",
-        style: "background-color:blue;",
-        color: "blue",
-      },
-      { name: "cyan", style: "background-color:cyan;", color: "cyan" },
-      {
-        name: "red",
-        style: "background-color:rgb(211,62,39,1);",
-        color: "rgb(211,62,39,1)",
-      },
-      { name: "orange", style: "background-color:orange;", color: "orange" },
-      { name: "green", style: "background-color:green;", color: "green" },
-    ],
-    color: "deep-purple",
+    color: "rgb(211,62,39,1)",
     dates: [],
     details: undefined,
     address: undefined,
+    username: undefined,
+    password: undefined,
     postResult: null,
     menu: false,
     menu1: false,
@@ -458,17 +409,26 @@ export default {
       this.focus = date;
       this.type = "week";
     },
-    colorChange(newColor) {
-      this.color = newColor;
-    },
+
     close() {
       this.$emit("close");
     },
     submit() {
-      this.$emit("submit");
-      this.createEvent();
-      this.$emit("close");
+      if (this.$refs.form.validate()) {
+        this.$emit("submit");
+        this.createEvent();
+        this.$emit("close");
+      }
     },
+
+    submit2() {
+      if (this.$refs.form.validate()) {
+        this.$emit("submit");
+        this.createUser();
+        this.$emit("close");
+      }
+    },
+
 
     showEvent({ nativeEvent, event }) {
       const open = () => {
@@ -489,7 +449,7 @@ export default {
       nativeEvent.stopPropagation();
     },
 
-    fortmatResponse(res) {
+    formatResponse(res) {
       return JSON.stringify(res, null, 1);
     },
 
@@ -504,9 +464,9 @@ export default {
           headers: res.headers,
           data: res.data,
         };
-        this.postResult = this.fortmatResponse(result);
+        this.postResult = this.formatResponse(result);
       } catch (err) {
-        this.postResult = this.fortmatResponse(err.response?.data) || err;
+        this.postResult = this.formatResponse(err.response?.data) || err;
         alert(
           "The server is not able to delete the event at this time. Please try again later."
         );
@@ -535,12 +495,36 @@ export default {
           headers: res.headers,
           data: res.data,
         };
-        this.postResult = this.fortmatResponse(result);
+        this.postResult = this.formatResponse(result);
       } catch (err) {
-        this.postResult = this.fortmatResponse(err.response?.data) || err;
+        this.postResult = this.formatResponse(err.response?.data) || err;
         alert("The server could not create the event. Please try again later.");
       }
       this.dialog2 = false;
+    },
+
+
+    async createUser() {
+      const postData = new FormData();
+
+     
+      postData.append("username", this.username);
+      postData.append("password", this.password);
+      postData.append("websiteId", 3);
+
+      try {
+        const res = await UserService.addUser(postData);
+        const result = {
+          status: res.status + "-" + res.statusText,
+          headers: res.headers,
+          data: res.data,
+        };
+        this.postResult = this.formatResponse(result);
+      } catch (err) {
+        this.postResult = this.formatResponse(err.response?.data) || err;
+        alert("The server could not create the user. Please try again later.");
+      }
+      this.dialog3 = false;
     },
 
     logOut() {
@@ -559,13 +543,16 @@ export default {
         this.dates = [];
         this.details = "";
         this.address = "";
-        this.color = "deep-purple";
-        this.select = {
-          name: "purple",
-          style: "background-color:#694bb7;",
-          color: "#694bb7",
-        };
+        this.color = "rgb(211,62,39,1)";
+
         this.getEvents();
+      }
+    },
+    dialog3: function (val) {
+      if (!val) {
+        this.$refs.form.reset();
+        this.username = "";
+        this.password = "";
       }
     },
   },
