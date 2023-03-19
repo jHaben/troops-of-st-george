@@ -149,55 +149,6 @@
                       <v-container>
                         <v-card flat tile>
                           <v-row>
-                         
-                              <v-textarea v-model="username" required :rules="[v => !!v || 'Username is required']"
-                                counter maxlength="15" color="#272727" label="Username" outlined 
-                                type="text" dense cols="20"></v-textarea>
-                          
-                          </v-row>
-                        </v-card></v-container>
-                      <v-container>
-                        <v-card flat tile>
-                          <v-row>
-                        
-                              <v-textarea v-model="password" required :rules="[v => !!v || 'Password is required']"
-                                counter maxlength="12" minlength="6"  color="#272727" label="Password" outlined
-                                 type="text" dense cols="20"></v-textarea>
-                            
-                          </v-row>
-                        </v-card></v-container>
-
-                    </v-form>
-
-                    <v-card-actions>
-                      <v-btn :disabled="!valid" color="green" text @click="submit2()">
-                        Create
-                      </v-btn>
-
-                      <v-spacer />
-                      <v-btn color="red" text @click="(dialog3 = false), close()">
-                        Cancel
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
-              <v-spacer />
-
-              <v-row justify="center">
-                <v-dialog v-model="dialog3" persistent max-width="1000">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn style="background-color: white" v-bind="attrs" v-on="on" outlined depressed rounded
-                      color="black" small elevation="3"><v-icon left>{{ "mdi-head" }}</v-icon>Add User</v-btn>
-                  </template>
-                  <v-card>
-                    <v-form ref="form" v-model="valid" class="pa-4 pt-6">
-                      <v-card-title>
-                        <span class="text-h5">Add User</span>
-                      </v-card-title>
-                      <v-container>
-                        <v-card flat tile>
-                          <v-row>
 
                             <v-textarea v-model="username" required :rules="[v => !!v || 'Username is required']" counter
                               maxlength="15" color="#272727" label="Username" outlined type="text" dense
