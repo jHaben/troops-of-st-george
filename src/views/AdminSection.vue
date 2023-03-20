@@ -141,26 +141,26 @@
                     <v-btn style="background-color: white" v-bind="attrs" v-on="on" outlined depressed rounded
                       color="black" small elevation="3"><v-icon left>{{ "mdi-head" }}</v-icon>Add User</v-btn>
                   </template>
-                  <v-card style="max-width: 400px;">
+                  <v-card align="center" style="max-width: 500px;">
                     <v-form ref="form" v-model="valid" class="pa-4 pt-6">
                       <v-card-title>
                         <span class="text-h5">Add User</span>
                       </v-card-title>
                       <v-container>
-                        <v-card flat tile>
+                        <v-card flat tile style="max-height: 96px;">
                           <v-row>
 
                             <v-textarea v-model="username" required :rules="[v => !!v || 'Username is required']" counter
-                              maxlength="15" color="#272727" label="Username" outlined type="text" style="max-height: 96px;"></v-textarea>
+                              maxlength="15" color="#272727" label="Username" outlined type="text" ></v-textarea>
 
                           </v-row>
                         </v-card></v-container>
                       <v-container>
-                        <v-card flat tile>
+                        <v-card flat tile style="max-height: 96px;">
                           <v-row>
 
                             <v-textarea v-model="password" required :rules="[v => !!v || 'Password is required']" counter
-                              maxlength="12" minlength="6" color="#272727" label="Password" outlined type="text" style="max-height: 96px;"></v-textarea>
+                              maxlength="12" minlength="6" color="#272727" label="Password" outlined type="text" ></v-textarea>
 
                           </v-row>
                         </v-card></v-container>
