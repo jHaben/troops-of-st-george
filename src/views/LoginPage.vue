@@ -3,16 +3,16 @@
     <v-sheet color="transparent" height="100" />
     <v-card align="center" color="transparent" flat tile>
 
-      <v-card align="center" height="400" width="400">
+      <v-card align="center" width="400">
         <div>
           <form name="form" v-on:keyup.enter="handleLogin">
             <div class="ma-16">
               <label for="username">
-                <h2>Username</h2>
+              
               </label>
               <br />
               <input style="background-color: white; border-style: outset" v-model="user.username" v-validate="'required'"
-                type="text" class="form-control" name="username" autocomplete="on" />
+                type="text" class="form-control" name="username" autocomplete="on" placeholder="Username"/>
 
               <div v-if="errors.has('username')" class="alert alert-danger" style="color: red" role="alert">
                 Username is required!
@@ -20,11 +20,11 @@
             </div>
             <div class="ma-16">
               <label for="password">
-                <h2>Password</h2>
+           
               </label>
               <br />
               <input style="background-color: white; border-style: outset" v-model="user.password" v-validate="'required'"
-                type="password" class="form-control" name="password" autocomplete="on" />
+                type="password" class="form-control" name="password" autocomplete="on" placeholder="Password"/>
               <div v-if="message" style="color: red" role="alert">
                 {{ message }}
               </div>
@@ -34,8 +34,8 @@
             </div>
             <vue-recaptcha ref="recaptcha" @verify="onVerify" :sitekey="siteKey">
             </vue-recaptcha>
-            <div class="ma-16">
-              <v-btn :disabled="loading || !robot" @click="handleLogin">
+            <div >
+              <v-btn :disabled="loading || !robot" @click="handleLogin" class="ma-8">
                 <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                 <span>Login</span>
               </v-btn>
