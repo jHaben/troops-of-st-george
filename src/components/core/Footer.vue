@@ -66,8 +66,8 @@ export default {
       }
     },
     sendEmail() {
-    window.location.href = 'mailto:troops@churchofsaintagnes.org';
-  },
+      window.location.href = 'mailto:troops@churchofsaintagnes.org';
+    },
   },
 
 };
