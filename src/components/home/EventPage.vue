@@ -1,5 +1,5 @@
 <template>
-  <div style="border: solid; border-color: #694bb7; border-width: 6px" class="my-2">
+  <div style="border: solid; border-color: black; border-width: 6px" class="my-2">
     <v-row>
       <v-col>
         <v-sheet tile>
