@@ -1,8 +1,5 @@
 <template>
-  <div
-    style="border: solid; border-color: rgb(211,62,39,1); border-width: 6px"
-    class="my-2"
-  >
+  <div style="border: solid; border-color: #694bb7; border-width: 6px" class="my-2">
     <v-row>
       <v-col>
         <v-sheet tile>
@@ -10,28 +7,22 @@
             <v-container>
               <v-row>
                 <v-row align="center">
-                  <v-btn icon class="ma-2" @click="$refs.calendar.prev()">
+                  <v-btn icon class="ma-2" @click="prev">
                     <v-icon x-large>mdi-chevron-left</v-icon>
                   </v-btn>
 
-                  <v-btn icon class="ma-2" @click="$refs.calendar.next()">
+                  <v-btn icon class="ma-2" @click="next">
                     <v-icon x-large>mdi-chevron-right</v-icon>
                   </v-btn>
-                  <v-toolbar-title v-if="$refs.calendar">
-                    {{ $refs.calendar.title }}
+                  <v-toolbar-title v-if="calendarTitle">
+                    {{ calendarTitle }}
                   </v-toolbar-title>
                 </v-row>
                 <v-row>
                   <v-spacer />
                   <v-menu>
                     <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        outlined
-                        small
-                        color="grey darken-2"
-                        v-bind="attrs"
-                        v-on="on"
-                      >
+                      <v-btn outlined small color="grey darken-2" v-bind="attrs" v-on="on">
                         <span>{{ typeToLabel[type] }}</span>
                         <v-icon right> mdi-menu-down </v-icon>
                       </v-btn>
@@ -52,27 +43,10 @@
           </v-toolbar>
         </v-sheet>
         <v-sheet height="550px">
-          <v-calendar
-            ref="calendar"
-            v-model="focus"
-            color="primary"
-            :weekdays="weekday"
-            :type="type"
-            show-month-on-first
-            :events="displayEvents"
-            :event-overlap-mode="mode"
-            :event-overlap-threshold="30"
-            @click:event="showEvent"
-            @mouseenter:event="showEvent"
-            @click:more="viewWeek"
-            height="100%"
-          ></v-calendar>
-          <v-menu
-            v-model="selectedOpen"
-            :close-on-content-click="false"
-            :activator="selectedElement"
-            offset-x
-          >
+          <v-calendar ref="calendar" v-model="focus" color="primary" :weekdays="weekday" :type="type" show-month-on-first
+            :events="displayEvents" :event-overlap-mode="mode" :event-overlap-threshold="30" @click:event="showEvent"
+            @mouseenter:event="showEvent" @click:more="viewWeek" height="100%"></v-calendar>
+          <v-menu v-model="selectedOpen" :close-on-content-click="false" :activator="selectedElement" offset-x>
             <v-card color="grey lighten-4" min-width="150px" flat>
               <v-toolbar :color="selectedEvent.color" dark>
                 <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
@@ -95,12 +69,11 @@
             </v-card>
           </v-menu>
         </v-sheet>
-      </v-col></v-row
-    >
+      </v-col></v-row>
   </div>
 </template>
 <script>
-import UserServices from "../../services/user.service";
+//import UserServices from "../../services/user.service";
 
 export default {
   name: "EventPage",
@@ -113,7 +86,28 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     setEvents: [],
-    allEvents: [],
+    allEvents: [
+      {
+      "eventID": 0,
+      "websiteID": 2,
+      "name": "Donut Sunday",
+      "start": "2023-09-10 06:30",
+      "end": "2023-09-10 11:30",
+      "color": "blue",
+      "details": "Serve donuts after all Mass Times ",
+      "address": "St. Agnes"
+    },{
+      "eventID": 1,
+      "websiteID": 2,
+      "name": "First Meeting",
+      "start": "2023-09-11 18:30",
+      "end": "2023-09-11 20:00",
+      "color": "red",
+      "details": "TSG 121 Meeting",
+      "address": "TBD"
+    }
+  ],
+
     colors: [
       "blue",
       "indigo",
@@ -128,11 +122,34 @@ export default {
       week: "Week",
     },
     focus: "",
+    calendarTitle: "",
   }),
 
   beforeMount() {
-    this.getEvents();
+    //this.getEvents();
+
   },
+
+
+
+
+  mounted() {
+    this.$nextTick(() => {
+      if (this.$refs.calendar) {
+        this.calendarTitle = this.$refs.calendar.title;
+      }
+    });
+  },
+  // watch: {
+  //   'focus': function () {
+  //     if (this.$refs.calendar) {
+  //       this.calendarTitle = this.$refs.calendar.title;
+  //     }
+  //   },
+  // },
+
+
+
   computed: {
     displayEvents() {
       return this.allEvents;
@@ -140,25 +157,38 @@ export default {
   },
 
   methods: {
+
+    next() {
+      this.$refs.calendar.next();
+      this.$nextTick(() => {
+        this.calendarTitle = this.$refs.calendar.title;
+      });
+    },
+    prev() {
+      this.$refs.calendar.prev();
+      this.$nextTick(() => {
+        this.calendarTitle = this.$refs.calendar.title;
+      });
+    },
     viewWeek({ date }) {
       console.log(date);
       this.focus = date;
       this.type = "week";
     },
-    getEvents() {
-      UserServices.getEvents().then(
-        (response) => {
-          this.allEvents = response.data;
-        },
-        (error) => {
-          console.log(
-            (error.response && error.response.data) ||
-              error.message ||
-              error.toString()
-          );
-        }
-      );
-    },
+    // getEvents() {
+    //   UserServices.getEvents().then(
+    //     (response) => {
+    //       this.allEvents = response.data;
+    //     },
+    //     (error) => {
+    //       console.log(
+    //         (error.response && error.response.data) ||
+    //           error.message ||
+    //           error.toString()
+    //       );
+    //     }
+    //   );
+    // },
     showEvent({ nativeEvent, event }) {
       const open = () => {
         this.selectedEvent = event;
@@ -198,6 +228,3 @@ export default {
   },
 };
 </script>
-
-
-
