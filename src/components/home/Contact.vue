@@ -66,7 +66,7 @@ export default {
     name: "HomeContact",
     methods: {
       sendEmail() {
-        window.location.href = 'mailto:troops@churchofsaintagnes.org';
+        window.location.href = 'mailto:jrhaben@gmail.com';
       },
     },
   };
