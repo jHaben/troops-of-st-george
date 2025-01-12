@@ -232,10 +232,10 @@ export default {
 
     setTotal() {
       this.total =
-        this.donut * 1.25 +
+        this.donut * 1.5 +
         this.sandwhich * 3 +
-        this.coffee +
-        this.drink * 0.75;
+        this.coffee + 
+        this.drink * .75;
     },
 
     setPaid(digit) {
